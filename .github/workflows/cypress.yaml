@@ -1,0 +1,33 @@
+name: Cypress
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cypress:
+    name: Cypress
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Run Cypress
+        id: run-cypress
+        continue-on-error: true
+        uses: cypress-io/github-action@v2
+
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: report.json
+          reporter: mocha-json
+
+      - name: Fail Job if Cypress Failed
+        if: ${{ steps.run-cypress.outcome == 'failure' }}
+        run: exit 1
+
