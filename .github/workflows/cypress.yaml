@@ -19,6 +19,13 @@ jobs:
         continue-on-error: true
         uses: cypress-io/github-action@v2
 
+      - name: Read test results
+        id: results
+        run: echo ::set-output name=results::$( cat results.json )
+
+      - name: Print test results
+        run: echo ${{ steps.results.outputs.results }}
+
       - name: Publish test results
         uses: dorny/test-reporter@v1
         if: always()
