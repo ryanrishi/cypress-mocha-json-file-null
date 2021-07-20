@@ -20,11 +20,11 @@ jobs:
         uses: cypress-io/github-action@v2
 
       - name: Read test results
-        id: results
-        run: echo ::set-output name=results::$( cat results.json )
+        id: report
+        run: echo ::set-output name=report::$( cat report.json )
 
       - name: Print test results
-        run: echo ${{ steps.results.outputs.results }}
+        run: echo ${{ steps.report.outputs.report }}
 
       - name: Publish test results
         uses: dorny/test-reporter@v1
