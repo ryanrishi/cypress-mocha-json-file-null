@@ -1,0 +1,3 @@
+{
+  "reporterEnabled": ["spec", "@mochajs/json-file-reporter"]
+}
